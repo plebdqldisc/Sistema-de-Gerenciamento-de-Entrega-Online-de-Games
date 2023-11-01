@@ -1,0 +1,57 @@
+(texto original)
+
+Sistema de Gerenciamento de Entrega Online de Games:
+
+O que é necessário ter:
+Features:
+- Sistema de Pedidos; (pode ser como um cadastro de pedido para o cliente, aí o pedido entra no banco de dados, aí para ver o pedido seria fazendo uma listagem por meio de um listPedido por exemplo).
+- Apresentação dos produtos; (apresentação dos produtos disponíveis com descrições, preços e imagens, falando qual é a plataforma também).
+- Múltiplas Formas de Pagamento; (Aceitar pagamentos online, incluindo cartões de crédito, débito e entre outros)
+- Controle de Estoque; (Acompanhamento do estoque de produtos para garantir que os itens estejam disponíveis para pedidos)
+
+- Carrinho de produtos; (sistema de somatória, de junção de preços, para fazer toda a compra de uma vez!)
+- Promoções e Descontos; {*opcional até o final} (Capacidade de aplicar promoções, cupons e descontos especiais para incentivar as vendas)
+- Gestão de Clientes; (Manutenção de um banco de dados de clientes com informações de contato, com dados de forma de pagamento e endereços)
+- Interface de Gerenciamento; (Um painel de administração fácil de usar para monitorar pedidos, cadastrar produtos)
+
+_____________________________________________________________________________
+
+
+
+
+
+
+
+
+
+O que NÃO É NECESSÁRIO TER:
+
+- Pagamento em Dinheiro: Se a empresa não aceitar pagamentos em dinheiro e se concentrar apenas em pagamentos eletrônicos, não é necessário incluir a funcionalidade de pagamento em dinheiro.
+- Programa de Fidelidade: Em alguns casos, um programa de fidelidade pode não ser uma prioridade se o negócio estiver focado em vendas ocasionais ou em mercados específicos.
+- Tradução de Idiomas: Se o público-alvo for predominantemente monolíngue e não houver necessidade de traduzir o sistema para vários idiomas, a funcionalidade de tradução pode ser dispensada.
+- Recursos de Entretenimento: Recursos de entretenimento, como reprodução de música ou jogos, podem ser desnecessários em um sistema de gerenciamento de delivery focado estritamente na gestão de pedidos e entregas.
+_____________________________________________________________________________________
+
+Vamos pôr em tabela:
+Estado: ID, NOME. (Não precisaremos de país pois planejo que seja algo tendo somente o Brasil como parte.)
+|
+Cidade: ID, ID_ESTADO, NOME.
+|
+Endereço: ID, ID_CIDADE, RUA, CEP, NUMERO_RESIDENCIA. (autoexplicativo, pois para o cliente efetuar qualquer tipo de compra, nós precisaríamos saber de seus dados de endereço.)
+|
+Pessoa: ID, ID_ENDEREÇO, NOME, SOBRENOME, GENERO, TELEFONE, EMAIL, CPF, CARTÃO DE CREDITO(nesse você mergulha mais a fundo depois), USUARIO E SENHA.
+|
+Cliente: ID, ID_PESSOA.
+|
+Pedido: ID, ID_CLIENTE, DATA_PEDIDO, STATUS DO PEDIDO(pendente, pago, em preparo, entregue, cancelado, etc), endereço de entrega... (deve haver mais).
+|
+|
+ItensCarrinhodeCompras: ID, ID_CLIENTE, ID_PRODUTO, QUANTIDADE, PREÇO_UNITARIO, SUBTOTAL, STATUS(para rastrear alterações, como remoções ou atualizações.).
+|
+Produto: ID, ID_CATEGORIA, ID_MARCA, NOME, DESCRICAO, PRECO.
+|
+Estoque: ID, ID_PRODUTO, QUANTIDADE NO ESTOQUE, LOCALIZACAO, DATADEATUALIZACAO.
+|
+(conectado ao produto) Categoria: ID, NOME, DESCRICAO.
+|
+(conectada ao produto) Marca: ID, NOME.

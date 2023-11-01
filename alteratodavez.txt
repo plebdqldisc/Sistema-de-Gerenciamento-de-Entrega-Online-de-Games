@@ -1,0 +1,55 @@
+script de dados que fiz até o momento(para deixar claro, ainda nao iniciei o netbeans):
+
+create table estado (
+	id integer primary key,
+	nome varchar(25) not null,
+	uf varchar(2) not null
+)
+
+create table cidade (
+	id integer primary key,
+	id_estado integer not null,
+	nome varchar(25),
+	foreign key (id_estado) references estado(id)
+)
+
+create table endereco (
+	id integer primary key,
+	id_cidade integer not null,
+	nome_rua integer not null,
+	cep integer not null,
+	numero_residencia integer not null,
+	foreign key (id_cidade) references cidade(id)
+)
+
+create table pessoa (
+	id integer primary key,
+	id_endereco integer not null,
+	nome varchar(30) not null,
+	sobrenome varchar(30) not null,
+	genero varchar(10) not null,
+	telefone varchar(30) not null,
+	email varchar(30) not null,
+	cpf varchar(25) not null,
+	cartaocreditoultimosquatrodigit varchar(4) not null,
+	cartaocreditonomedotitular varchar(20) not null,
+	cartaocreditodatavencimento varchar(20) not null,
+	usuario varchar(25) not null,
+	senha varchar(16) not null,
+	foreign key (id_endereco) references endereco (id)
+	)
+
+create table cliente (
+	id integer primary key,
+	id_pessoa integer not null,
+	foreign key (id_pessoa) references pessoa (id)
+)
+
+create table pedido (
+	id integer primary key,
+	id_cliente integer not null,
+	data_pedido date not null,
+	statuspedido integer not null,
+	enderecoentrega varchar(75) not null,
+	foreign key (id_cliente) references cliente (id)
+)
