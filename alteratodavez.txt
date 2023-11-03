@@ -53,3 +53,46 @@ create table pedido (
 	enderecoentrega varchar(75) not null,
 	foreign key (id_cliente) references cliente (id)
 )
+
+create table categoria (
+	id integer primary key,
+	nome varchar(25) not null,
+	descricao varchar (40) not null
+)
+
+create table marca (
+	id integer primary key,
+	nome varchar(20) not null
+)
+
+create table produto (
+	id integer primary key,
+	id_categoria integer not null,
+	id_marca integer not null,
+	nome varchar(50) not null,
+	descricao varchar(40) not null,
+	preco double not null,
+	foreign key (id_categoria) references categoria (id),
+	foreign key (id_marca) references marca(id)
+)
+
+create table estoque (
+	id integer primary key,
+	id_produto integer not null,
+	quantidadeestoque double not null,
+	localizacao varchar(70) not null,
+	datadeatualizacao date not null,
+	foreign key (id_produto) references produto (id)
+)
+
+create table CarrinhoCompras (
+	id integer primary key,
+	id_produto integer not null,
+	id_pedido integer not null,
+	quantidadeitens double not null,
+	precounitario varchar(6) not null,
+	subtotal double not null,
+	status varchar(40) not null,
+	foreign key (id_produto) references produto (id),
+	foreign key (id_pedido) references pedido (id)
+)
