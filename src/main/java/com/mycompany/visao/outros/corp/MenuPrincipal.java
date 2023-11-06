@@ -4,6 +4,12 @@
  */
 package com.mycompany.visao.outros.corp;
 
+import com.mycompany.ferramentas.BancoDeDadosMySql;
+import com.mycompany.ferramentas.Formularios;
+import com.mycompany.visao.categoria.CadCategoria;
+import com.mycompany.visao.categoria.ListCategoria;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author arthur.7923
@@ -15,6 +21,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        setExtendedState(MAXIMIZED_BOTH);
+        
+        if (!BancoDeDadosMySql.conectar()) {
+            JOptionPane.showMessageDialog( null, "Não foi possivel conectar ao banco de dados. O sistema será finalizado.");
+            System.exit(0);
+        }
+    
     }
 
     /**
@@ -29,9 +45,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        miCadastroCategoria = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        miConsultaCategoria = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,24 +55,34 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
+            .addGap(0, 277, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Cadastro");
 
-        jMenuItem1.setText("Categoria");
-        jMenu1.add(jMenuItem1);
+        miCadastroCategoria.setText("Categoria");
+        miCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCadastroCategoriaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miCadastroCategoria);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Consulta");
 
-        jMenuItem2.setText("Categoria");
-        jMenu2.add(jMenuItem2);
+        miConsultaCategoria.setText("Categoria");
+        miConsultaCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miConsultaCategoriaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(miConsultaCategoria);
 
         jMenuBar1.add(jMenu2);
 
@@ -66,21 +92,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void miCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCadastroCategoriaActionPerformed
+        if(Formularios.cadCategoria == null)
+            Formularios.cadCategoria = new CadCategoria();
+        
+        Formularios.cadCategoria.setVisible(true);
+    }//GEN-LAST:event_miCadastroCategoriaActionPerformed
+
+    private void miConsultaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultaCategoriaActionPerformed
+        Formularios.listCategoria = new ListCategoria();
+        Formularios.listCategoria.setVisible(true);
+    }//GEN-LAST:event_miConsultaCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,8 +153,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem miCadastroCategoria;
+    private javax.swing.JMenuItem miConsultaCategoria;
     // End of variables declaration//GEN-END:variables
 }
